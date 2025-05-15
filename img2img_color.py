@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
 
-from utils import get_data, get_data_new
+from utils import get_bbox_from_font, get_data, get_data_new
 
 
 def get_args():
@@ -34,8 +34,6 @@ def main_new(opt: dict):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     height, width, _ = image.shape
     
-    print(height, width)
-
     cell_width = width / num_cols
     cell_height = scale * cell_width
     num_rows = int(height / cell_height)
@@ -47,7 +45,7 @@ def main_new(opt: dict):
         num_cols = int(width / cell_width)
         num_rows = int(height / cell_height)
 
-    char_width, char_height = font.getbbox(sample_character)
+    char_width, char_height = get_bbox_from_font(font, sample_character)
     out_width = char_width * num_cols
     out_height = scale * char_height * num_rows
 

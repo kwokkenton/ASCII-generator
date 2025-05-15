@@ -2,17 +2,27 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
+def get_bbox_from_font(font, character):
+    left, top, right, bottom  = font.getbbox(character)
+    width = right - left
+    height = bottom - top
+    print(width, height)
+    print(font.getsize(character))
+    return width, height + 8
+
+
 def sort_chars(char_list:str, font, language):
     if language == "chinese":
-        char_width, char_height = font.getbbox("制")
+        sample_char = "制"
     elif language == "korean":
-        char_width, char_height = font.getbbox("ㅊ")
+        sample_char = "ㅊ"
     elif language == "japanese":
-        char_width, char_height = font.getbbox("あ")
-    elif language in ["english", "german", "french", "spanish", "italian", "portuguese", "polish"]:
-        char_width, char_height = font.getbbox("A")
-    elif language == "russian":
-        char_width, char_height = font.getbbox("A")
+        sample_char = "あ"
+    elif language in ["english", "german", "french", "spanish", "italian", "portuguese", "polish", "russian"]:
+        sample_char = "A"
+
+    char_width, char_height = get_bbox_from_font(font, sample_char)
+
     num_chars = min(len(char_list), 100)
     out_width = char_width * len(char_list)
     out_height = char_height
