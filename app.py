@@ -18,7 +18,7 @@ if uploaded_file is not None:
         input_path = tmp.name
 
     # Slider for number of columns
-    num_cols = st.slider("Number of columns", min_value=50, max_value=500, value=300, step=10, help='More means font size is smaller')
+    num_cols = st.slider("Number of columns", min_value=10, max_value=300, value=150, step=10, help='Higher means font size is smaller')
 
     sentence = st.text_input("Enter your sentence", value="Message here.")
 
