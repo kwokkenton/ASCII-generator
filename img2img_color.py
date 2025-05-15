@@ -99,7 +99,7 @@ def main(opt: dict):
         num_cols = int(width / cell_width)
         num_rows = int(height / cell_height)
 
-    char_width, char_height = font.getsize(sample_character)
+    char_width, char_height = font.getbbox(sample_character)
     out_width = char_width * num_cols
     out_height = scale * char_height * num_rows
 
