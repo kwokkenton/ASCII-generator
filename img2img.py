@@ -2,9 +2,11 @@
 @author: Viet Nguyen <nhviet1009@gmail.com>
 """
 import argparse
+
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
+
 from utils import get_data
 
 

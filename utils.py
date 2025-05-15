@@ -1,8 +1,8 @@
 import numpy as np
-from PIL import Image, ImageFont, ImageDraw, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
-def sort_chars(char_list, font, language):
+def sort_chars(char_list:str, font, language):
     if language == "chinese":
         char_width, char_height = font.getsize("制")
     elif language == "korean":
@@ -40,6 +40,22 @@ def sort_chars(char_list, font, language):
         result += zipped_lists[-1][1]
     return result
 
+def get_data_new(sentence:str):
+    # Transform sentence into character list
+    assert len(sentence) > 0
+    from alphabets import ENGLISH as character
+    font = ImageFont.truetype("fonts/DejaVuSansMono-Bold.ttf", size=20)
+    sample_character = "A"
+    scale = 2
+
+    char_list = expand_case_sorted(set(character['standard']).intersection(sentence))
+
+    char_list = sort_chars(char_list, font, "english")
+
+    return char_list, font, sample_character, scale
+
+def expand_case_sorted(char_set):
+    return ''.join(sorted(c.upper() + c.lower() for c in char_set))
 
 def get_data(language, mode):
     if language == "general":
@@ -117,3 +133,6 @@ def get_data(language, mode):
         char_list = sort_chars(char_list, font, language)
 
     return char_list, font, sample_character, scale
+
+if __name__ == "__main__":
+    get_data_new('Hello my name is jack')

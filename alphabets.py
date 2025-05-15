@@ -20,6 +20,10 @@ ENGLISH = {
     "standard": "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 }
 
+# ENGLISH = {
+#     "standard": "AaBbCcDdEeFfGg"
+# }
+
 RUSSIAN = {
     "standard": "АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя"
 }
