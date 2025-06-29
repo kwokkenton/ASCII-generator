@@ -23,7 +23,7 @@ def get_args():
     args = parser.parse_args()
     return vars(args)  # ✅ convert Namespace to dict
 
-def main_new(opt: dict):
+def image_to_image(opt: dict):
     bg_code = (255, 255, 255) if opt["background"] == "white" else (0, 0, 0)
 
     char_list, font, sample_character, scale = get_data_new(opt["sentence"])

@@ -6,7 +6,6 @@ def get_bbox_from_font(font, character):
     left, top, right, bottom  = font.getbbox(character)
     width = right - left
     height = bottom - top
-    print(width, height)
     # print(font.getsize(character))
     return width, height + 8
 
