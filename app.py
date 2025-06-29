@@ -17,10 +17,10 @@ if 'submitted' not in st.session_state:
 
 # Only show input elements if not submitted
 if not st.session_state.submitted:
-    st.title("Larissa at N+")
+    st.title("Tell Me a Secret")
 
-    sentence = st.text_input("What is a secret or something you would be scared to say?")
-    if st.button("surprise!"):
+    sentence = st.text_input("Your secret is safe with me.")
+    if st.button("Transform!"):
 
         if IMAGE:
             options = {
@@ -55,3 +55,4 @@ else:
         st.image(output_path, use_container_width=True)
     else:
         st.video(output_path)
+        st.markdown("<p style='text-align: center; '>Don't worry, it's gone now</p>", unsafe_allow_html=True)
