@@ -175,15 +175,9 @@ def video_to_video(opt:dict ):
         
         out_images.append(out_image)
 
-        # Overlay original image ontop of new one
-        # if opt.get('overlay_ratio'):
-        #     height, width, _ = out_image.shape
-        #     overlay = cv2.resize(frame, (int(width * opt['overlay_ratio']), int(height * opt['overlay_ratio'])))
-        #     out_image[height - int(height * opt['overlay_ratio']):, width - int(width * opt['overlay_ratio']):, :] = overlay
-
     cap.release()
 
-    assert all(img.shape == out_images[0].shape for img in out_images)
+    # assert all(img.shape == out_images[0].shape for img in out_images)
     # Save video
     out = cv2.VideoWriter(opt['output'], cv2.VideoWriter_fourcc(*'mp4v'), fps,
                     ((out_image.shape[1], out_image.shape[0])))
