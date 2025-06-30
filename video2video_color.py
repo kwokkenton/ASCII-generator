@@ -29,6 +29,7 @@ def reencode_mp4(input_path: str, output_path: str, codec: str = 'libx264', fps:
 
     stream = ffmpeg.output(stream, output_path, **kwargs).overwrite_output()
     ffmpeg.run(stream)
+
     
 def get_args():
     parser = argparse.ArgumentParser("Image to ASCII")
@@ -46,7 +47,7 @@ def get_args():
     return args
 
 def main(opt:dict ):
-
+    
     if opt.mode == "simple":
         CHAR_LIST = '@%#*+=-:. '
     else:
@@ -118,6 +119,8 @@ def main(opt:dict ):
     out.release()
 
 def video_to_video(opt:dict ):
+    out_path = opt['output']
+
     out_images = []
 
     char_list, font, sample_character, scale = get_data_new(opt["sentence"])
@@ -177,17 +180,10 @@ def video_to_video(opt:dict ):
 
     cap.release()
 
-    # assert all(img.shape == out_images[0].shape for img in out_images)
-    # Save video
-    out = cv2.VideoWriter(opt['output'], cv2.VideoWriter_fourcc(*'mp4v'), fps,
-                    ((out_image.shape[1], out_image.shape[0])))
+    images = []
     for out_frame in out_images:
-
-        out.write(out_frame)
-    
-    out.release()
-
-    reencode_mp4(input_path = opt['output'], output_path = opt['output_reencoded'])
+        images.append(Image.fromarray(out_frame[:,:,::-1], mode="RGB"))
+    images[0].save(out_path, save_all=True, append_images=images[1:], duration=60, loop=0)
 
 
 if __name__ == '__main__':
@@ -197,7 +193,7 @@ if __name__ == '__main__':
     sentence = 'hello '
     options = {
             "input": input_path,
-            "output": output_path,
+            "output": 'data/output.gif',
             "sentence": sentence,
             "language": "english",
             "mode": "standard",

@@ -9,7 +9,7 @@ if IMAGE:
     output_path = 'data/out.jpg'
 else: 
     input_path = 'data/in.mp4'
-    output_path = 'data/out.mp4'
+    output_path = 'data/out.gif'
 
 # Initialize session state
 if 'submitted' not in st.session_state:
@@ -37,8 +37,7 @@ if not st.session_state.submitted:
         else:
             options = {
             "input": input_path,
-            "output": 'data/temp.mp4',
-            "output_reencoded": output_path,
+            "output": output_path,
             "sentence": sentence,
             "language": "english",
             "mode": "standard",
@@ -54,5 +53,5 @@ else:
     if IMAGE:
         st.image(output_path, use_container_width=True)
     else:
-        st.video(output_path)
+        st.image(output_path, use_container_width=True)
         st.markdown("<p style='text-align: center; '>Don't worry, it's gone now</p>", unsafe_allow_html=True)
